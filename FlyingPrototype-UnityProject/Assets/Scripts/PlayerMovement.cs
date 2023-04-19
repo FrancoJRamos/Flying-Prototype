@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private float speed =8f;
     private float jumpingPower =16f;
     public bool isFacingRight = true;
+    //private float jumpExplodePower = 32f;
 
     //SerializeField
     [SerializeField] private Rigidbody2D rb;
@@ -18,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void Update()//use inputs to call functions
     {
         horizontal = Input.GetAxisRaw("Horizontal");//returns a value of -1, 0, or 1
 
@@ -56,6 +57,13 @@ public class PlayerMovement : MonoBehaviour
             localScale.x *= -1f;
             transform.localScale = localScale;
         }
+    }
+    */
+
+    /*
+    private void JumpExplode ()
+    {
+
     }
     */
 }
