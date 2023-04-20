@@ -9,6 +9,8 @@ public class ReticleBehavior : MonoBehaviour
     private Camera mainCam;
     private Vector3 mousePos;
 
+    public float rotZ;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,11 @@ public class ReticleBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ReticleAngle();
+    }
+
+    public float ReticleAngle ()
+    {
         //Find mouse position on the screen
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
 
@@ -25,14 +32,12 @@ public class ReticleBehavior : MonoBehaviour
         Vector3 rotation = mousePos - transform.position;
 
         //get the angle in radians by using inverser tan of vector.y component over vector.x component and convert to degrees
-        float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
+        rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
         //rotate game object(and its children) by the angle found
         transform.rotation = Quaternion.Euler(0,0,rotZ);
 
         //Debug.Log(rotZ);
-
+        return rotZ;
     }
-
-    
 }

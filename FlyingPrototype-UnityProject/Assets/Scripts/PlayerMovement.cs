@@ -10,13 +10,14 @@ public class PlayerMovement : MonoBehaviour
     private float speed =8f;
     private float jumpingPower =16f;
     public bool isFacingRight = true;
-    //private float jumpExplodePower = 32f;
+    private float angle;
+    private float jumpExplodePower = 32f;
 
     //SerializeField
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
-
+  
 
     // Update is called once per frame
     void Update()//use inputs to call functions
@@ -33,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y*0.5f);
         }
         //Flip();
+        JumpExplode();
     }
 
 
@@ -60,10 +62,17 @@ public class PlayerMovement : MonoBehaviour
     }
     */
 
-    /*
+    
     private void JumpExplode ()
     {
-
+        if(Input.GetButton("Fire1"))
+        {
+            //Working from Unity Lesson: https://learn.unity.com/tutorial/scope-and-access-modifiers?uv=2019.3&projectId=5c8920b4edbc2a113b6bc26a#5c8a40e9edbc2a001f47ccef
+            //set the value of angle equal to the angle found from the reticle
+            //angle = ReticleBehavior.ReticleAngle ()
+            //set a new vector2 with the x and y components of jumpExplodePower 
+            rb.velocity = new Vector2(jumpExplodePower*Mathf.Cos(angle), jumpExplodePower*Mathf.Sin(angle));
+        } 
     }
-    */
+    
 }
