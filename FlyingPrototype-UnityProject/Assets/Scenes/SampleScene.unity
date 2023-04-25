@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFacingRight: 1
+  playerReticleBehavior: {fileID: 1790598237}
   rb: {fileID: 103193222}
   groundCheck: {fileID: 2034144666}
   groundLayer:
@@ -306,6 +307,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dc000533f02f654999c21330b909230, type: 3}
+--- !u!114 &1790598237 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3339658895541144163, guid: 5e880bf8adaa6cd4eb64c2eeab135168, type: 3}
+  m_PrefabInstance: {fileID: 291590140181396196}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db1ff6a844069d24ea02ef1cd8137eef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1883138942
 PrefabInstance:
   m_ObjectHideFlags: 0

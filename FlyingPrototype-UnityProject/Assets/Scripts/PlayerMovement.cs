@@ -10,8 +10,9 @@ public class PlayerMovement : MonoBehaviour
     private float speed =8f;
     private float jumpingPower =16f;
     public bool isFacingRight = true;
-    private float angle;
+    private float playerAngle;
     private float jumpExplodePower = 32f;
+    public ReticleBehavior playerReticleBehavior;
 
     //SerializeField
     [SerializeField] private Rigidbody2D rb;
@@ -69,9 +70,11 @@ public class PlayerMovement : MonoBehaviour
         {
             //Working from Unity Lesson: https://learn.unity.com/tutorial/scope-and-access-modifiers?uv=2019.3&projectId=5c8920b4edbc2a113b6bc26a#5c8a40e9edbc2a001f47ccef
             //set the value of angle equal to the angle found from the reticle
-            //angle = ReticleBehavior.ReticleAngle ()
+            Debug.Log(playerReticleBehavior.ReticleAngle());
+            //playerAngle = playerReticleBehavior.ReticleAngle();
+            
             //set a new vector2 with the x and y components of jumpExplodePower 
-            rb.velocity = new Vector2(jumpExplodePower*Mathf.Cos(angle), jumpExplodePower*Mathf.Sin(angle));
+            //rb.velocity = new Vector2(jumpExplodePower*Mathf.Cos(playerAngle), jumpExplodePower*Mathf.Sin(playerAngle));
         } 
     }
     
