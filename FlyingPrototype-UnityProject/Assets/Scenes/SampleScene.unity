@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFacingRight: 1
+  jumpExplodePower: 32
   playerReticleBehavior: {fileID: 1790598237}
   rb: {fileID: 103193222}
   groundCheck: {fileID: 2034144666}
@@ -150,6 +151,11 @@ MonoBehaviour:
 --- !u!50 &103193222 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 1335840296900855908, guid: 5e880bf8adaa6cd4eb64c2eeab135168, type: 3}
+  m_PrefabInstance: {fileID: 291590140181396196}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &103193225 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6932425176728256081, guid: 5e880bf8adaa6cd4eb64c2eeab135168, type: 3}
   m_PrefabInstance: {fileID: 291590140181396196}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
@@ -249,7 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a47e6dfa8add3f4fa7c0dd02c285acb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectPosition: {x: 0.001, y: 0, z: 0}
+  player: {fileID: 103193225}
 --- !u!1001 &862100424
 PrefabInstance:
   m_ObjectHideFlags: 0

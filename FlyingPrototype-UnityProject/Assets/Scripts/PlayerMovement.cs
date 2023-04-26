@@ -11,7 +11,8 @@ public class PlayerMovement : MonoBehaviour
     private float jumpingPower =16f;
     public bool isFacingRight = true;
     private float playerAngle;
-    private float jumpExplodePower = 32f;
+    public float jumpExplodePower = 32f;
+    private float jAngle;
     public ReticleBehavior playerReticleBehavior;
 
     //SerializeField
@@ -34,7 +35,6 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y*0.5f);
         }
-        //Flip();
         JumpExplode();
     }
 
@@ -49,32 +49,27 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(horizontal * speed,rb.velocity.y);
     }
 
-
-    /*
-    private void Flip()
-    {
-        if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
-        {
-            isFacingRight = !isFacingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
-        }
-    }
-    */
-
-    
     private void JumpExplode ()
     {
-        if(Input.GetButton("Fire1"))
+        if(Input.GetButtonDown("Fire1"))
         {
             //Working from Unity Lesson: https://learn.unity.com/tutorial/scope-and-access-modifiers?uv=2019.3&projectId=5c8920b4edbc2a113b6bc26a#5c8a40e9edbc2a001f47ccef
             //set the value of angle equal to the angle found from the reticle
-            Debug.Log(playerReticleBehavior.ReticleAngle());
-            //playerAngle = playerReticleBehavior.ReticleAngle();
+            jAngle = playerReticleBehavior.ReticleAngle();
+            //Debug.Log("current reticle angle (in degrees) is: "+jAngle);
+            jAngle *= Mathf.Deg2Rad;
+            //Debug.Log("current reticle angle (in radians) is: "+jAngle);
             
-            //set a new vector2 with the x and y components of jumpExplodePower 
-            //rb.velocity = new Vector2(jumpExplodePower*Mathf.Cos(playerAngle), jumpExplodePower*Mathf.Sin(playerAngle));
+            float hjump = jumpExplodePower*Mathf.Cos(jAngle);
+            float vjump = jumpExplodePower*Mathf.Sin(jAngle);
+
+            Debug.Log("horizontal force applied is: "+hjump);
+            //Debug.Log("vertical force applied is: "+vjump);
+            
+            //rb.velocity = new Vector2(hjump, vjump);
+
+            //rb.AddForce(transform.up*vjump, ForceMode2D.Impulse);
+            rb.AddForce(transform.forward*hjump,ForceMode2D.Impulse);
         } 
     }
     
