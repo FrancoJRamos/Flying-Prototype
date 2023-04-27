@@ -7,9 +7,9 @@ public class PlayerMovement : MonoBehaviour
     //working from video: https://www.youtube.com/watch?v=K1xZ-rycYY8
     //declare variables
     private float horizontal;
-    private float speed =10f;
-    private float jumpingPower =60f;
-    private float jumpExplodePower = 80f;
+    private float speed =8f;
+    private float jumpingPower =16f;
+    private float jumpExplodePower = 200f;
     private float jAngle;
     public ReticleBehavior playerReticleBehavior;
     private bool isExploding = false;
@@ -20,10 +20,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
   
-    private void Awake()
-    {
-        animator = GetComponent<Animator>();
-    }
+
     // Update is called once per frame
     void Update()//use inputs to call functions
     {
@@ -32,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && IsGrounded())//if jump button is held, get the full jump power
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);    
-            animator.SetTrigger("Jump");
+            
         }
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)//if jump button is tapped, get a reduced jump power
@@ -42,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
         }
         JumpExplode();
 
-        Debug.Log(horizontal);
+        //Debug.Log(horizontal);
     }
 
 
@@ -63,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("current reticle angle (in radians) is: "+jAngle);
             
             float hjump = jumpExplodePower*Mathf.Cos(jAngle)*-1;
-            float vjump = jumpExplodePower*Mathf.Sin(jAngle) * -1;
+            float vjump = jumpingPower*Mathf.Sin(jAngle) * -1;
 
             Debug.Log("horizontal force applied is: "+hjump);
             Debug.Log("vertical force applied is: "+vjump);
@@ -74,23 +71,10 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(transform.right*hjump,ForceMode2D.Impulse);
 
             isExploding = false;
-        }else
-        {
-            if(horizontal == -1){
-                rb.velocity = new Vector2(horizontal * speed*3/4,rb.velocity.y);
-                //rb.AddForce(transform.right*speed*3/4*-1,ForceMode2D.Force);
-            }
-            else if(horizontal == 1){
-                rb.velocity = new Vector2(horizontal * speed,rb.velocity.y);
-
-
-                //rb.AddForce(transform.right*speed,ForceMode2D.Force);
-                //Animation, working from youtube video: https://www.youtube.com/watch?v=1Ll1fy2EehU&list=PLKUARkaoYQT178f_Y3wcSIFiViW8vixL4&index=7
-                animator.SetBool("Run", true);
-            }else{
-                animator.SetBool("Run",false);
-            }
+        }else{
+            rb.velocity = new Vector2(horizontal * speed,rb.velocity.y);
         }
+ 
     }
 
     private void JumpExplode ()
