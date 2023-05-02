@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         }
         JumpExplode();
 
-        Debug.Log(horizontal);
+        //Debug.Log(horizontal);
     }
 
 
@@ -56,17 +56,12 @@ public class PlayerMovement : MonoBehaviour
         if(isExploding)
         {
             //Working from Unity Lesson: https://learn.unity.com/tutorial/scope-and-access-modifiers?uv=2019.3&projectId=5c8920b4edbc2a113b6bc26a#5c8a40e9edbc2a001f47ccef
-            //set the value of angle equal to the angle found from the reticle
-            jAngle = playerReticleBehavior.ReticleAngle();
-            //Debug.Log("current reticle angle (in degrees) is: "+jAngle);
-            jAngle *= Mathf.Deg2Rad;
-            Debug.Log("current reticle angle (in radians) is: "+jAngle);
             
-            float hjump = jumpExplodePower*Mathf.Cos(jAngle)*-1;
+            float hjump = jumpExplodePower*Mathf.Cos(jAngle)*-1*5;
             float vjump = jumpExplodePower*Mathf.Sin(jAngle) * -1;
 
-            Debug.Log("horizontal force applied is: "+hjump);
-            Debug.Log("vertical force applied is: "+vjump);
+            //Debug.Log("horizontal force applied is: "+hjump);
+            //Debug.Log("vertical force applied is: "+vjump);
             
             //rb.velocity = new Vector2(hjump, vjump);
 
@@ -79,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
             if(horizontal == -1){
                 rb.velocity = new Vector2(horizontal * speed*3/4,rb.velocity.y);
                 //rb.AddForce(transform.right*speed*3/4*-1,ForceMode2D.Force);
+                animator.SetBool("Sneak",true);
             }
             else if(horizontal == 1){
                 rb.velocity = new Vector2(horizontal * speed,rb.velocity.y);
@@ -89,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetBool("Run", true);
             }else{
                 animator.SetBool("Run",false);
+                animator.SetBool("Sneak",false);
             }
         }
     }
@@ -97,9 +94,25 @@ public class PlayerMovement : MonoBehaviour
     {
         if(Input.GetButtonDown("Fire1"))
         {
+            //set the value of angle equal to the angle found from the reticle
+            jAngle = playerReticleBehavior.ReticleAngle();
+            //Debug.Log("current reticle angle (in degrees) is: "+jAngle);
+            jAngle *= Mathf.Deg2Rad;
+            Debug.Log("current reticle angle (in radians) is: "+jAngle);
+
             //set a bool to calculate vectors inside FixedUpdate()
             isExploding = true;
-            
+
+            //play animation based on angle value in radians
+            if (jAngle > Mathf.PI/-4 && jAngle < Mathf.PI/4){
+                animator.SetTrigger("Explode-Backward");
+            }else if (jAngle > Mathf.PI/4 && jAngle < 3*Mathf.PI/4){
+                animator.SetTrigger("Explode-Down");
+            }else if (jAngle > -3*Mathf.PI/4 && jAngle < Mathf.PI/-4){
+                animator.SetTrigger("Explode-Up");
+            }else{
+                animator.SetTrigger("Explode-Forward");
+            }
         } 
     }
     

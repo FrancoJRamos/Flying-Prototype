@@ -527,14 +527,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 103193220, guid: 5e880bf8adaa6cd4eb64c2eeab135168, type: 3}
-      propertyPath: jumpingPower
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 103193220, guid: 5e880bf8adaa6cd4eb64c2eeab135168, type: 3}
-      propertyPath: jumpExplodePower
-      value: 80
-      objectReference: {fileID: 0}
     - target: {fileID: 1335840296900855908, guid: 5e880bf8adaa6cd4eb64c2eeab135168, type: 3}
       propertyPath: m_LinearDrag
       value: 9
